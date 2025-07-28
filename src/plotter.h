@@ -7,11 +7,11 @@
 
 struct PlotData
 {
-    int pix_x=0;
-    int pix_y=0;
+    uint32_t pix_x=0;
+    uint32_t pix_y=0;
 
-    int pad_x=0;
-    int pad_y=0;
+    uint16_t pad_x=0;
+    uint16_t pad_y=0;
 
     float range_x_min=-10.f;
     float range_x_max=10.f;
@@ -21,6 +21,9 @@ struct PlotData
 
     std::vector<double> xs;
     std::vector<double> ys;
+
+    double user_range_x[2] = {0.0, 0.0};
+    double user_range_y[2] = {0.0, 0.0};
 
     std::wstring line_type=L"dashed";
     std::wstring plot_name=L"nothing";
