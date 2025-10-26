@@ -13,9 +13,10 @@ message(STATUS "Setting up CLI11 via FetchContent...")
 FetchContent_Declare(
     cli11
     GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
-    GIT_TAG        v2.3.2 # A recent, stable version
+    GIT_TAG        v2.5.0  # Nowsza wersja: wymaga CMake 3.9, brak deprecjacji z <3.5
 )
 FetchContent_MakeAvailable(cli11)
+
 
 # --- STB_IMAGE Dependency (Image Loading) ---
 message(STATUS "Fetching stb_image.h...")
@@ -30,13 +31,8 @@ if(NOT stb_POPULATED)
 endif()
 
 # --- GLAD Dependency (OpenGL Loader) ---
-message(STATUS "Fetching GLAD (OpenGL Loader)...")
-FetchContent_Declare(
-    glad
-    GIT_REPOSITORY https://github.com/Dav1dde/glad.git
-    GIT_TAG        v0.1.34
-)
-FetchContent_MakeAvailable(glad)
+add_library(glad STATIC external/glad/src/glad.c)
+target_include_directories(glad PUBLIC external/glad/include)
 
 # --- GLFW Dependency ---
 find_package(glfw3 3.3 QUIET)
