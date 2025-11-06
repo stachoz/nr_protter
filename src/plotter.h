@@ -35,6 +35,8 @@ extern PlotData plot_data;
 
 bool GeneratePlotFromFunc(const std::string& filename, 
     const std::function<double(double)> & gen, const uint32_t & num, double xmin, double xmax);
+bool GenerateContinuousPlotFromFunc(const std::string& filename, 
+    const std::function<double(double)> & gen, const uint32_t & num, double xmin, double xmax);
     bool GeneratePlotFromPoints(const std::string& filename, 
     const std::vector<double> &xs, const std::vector<double> &ys);
 bool GeneratePlot(const std::string& filename, ScatterPlotSeries *series);
@@ -42,6 +44,8 @@ bool GenerateSimplePlot(const std::string& filename,
     std::vector<double>& xs, 
     std::vector<double>& ys);
 bool GenerateEmptyPlot(const std::string& filename);
+bool ContinuousPlot(const std::string& filename, ScatterPlotSeries *series);
+void FinishContinuousPlot();
 
 
 #endif // PLOTTER_H

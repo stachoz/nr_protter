@@ -201,6 +201,42 @@ void on_key_d_pressed(GLFWwindow* window)
 }
 
 /////////////////////////////////////////////////////////////////////////
+// Example of creating multiple plots in one graph
+
+void on_key_z_pressed(GLFWwindow* window) 
+{
+    const double PI = 3.141592653589793;
+
+    plot_data.plot_name = L"sin/cos";
+    plot_data.line_type = L"solid";
+    plot_data.rgb[0] = 0.0;
+    plot_data.rgb[1] = 0.0;
+    plot_data.rgb[2] = 1.0;
+
+    GenerateContinuousPlotFromFunc(
+        "plot.png", [](double x) { return sinf((float)x); }, 64, -PI * 2.0,
+        PI * 2.0);
+
+    plot_data.rgb[0] = 1.0;
+    plot_data.rgb[1] = 0.0;
+    plot_data.rgb[2] = 0.0;
+
+    GenerateContinuousPlotFromFunc(
+        "plot.png", [](double x) { return cosf((float)x); }, 64, -PI * 2.0,
+        PI * 2.0);
+
+    reloadTexture(window, "plot.png");
+
+    FinishContinuousPlot();
+
+    points_->vertices.clear();
+    plot_data.xs.clear();
+    plot_data.ys.clear();
+    updateRenderObject(points_.get());
+}
+
+
+/////////////////////////////////////////////////////////////////////////
 // Empty slots for the students
 
 void on_key_f_pressed(GLFWwindow* window) {}
@@ -522,6 +558,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action,
         case GLFW_KEY_D: on_key_d_pressed(window); break;
         case GLFW_KEY_F: on_key_f_pressed(window); break;
         case GLFW_KEY_G: on_key_g_pressed(window); break;
+        case GLFW_KEY_Z: on_key_z_pressed(window); break;
 
         case GLFW_KEY_C: on_key_clear(window); break;
     }
